@@ -9,21 +9,29 @@ class RingBuffer:
 
     def append(self, item):
         #if at capacity, add to the last item in the list
-        if self.storage.length >= capacity:
-            self.storage.remove_from_tail()
-            self.storage.add_to_head(item)
+        if self.storage.length == self.capacity:
+            if self.current != None and self.current.next != None:
+                self.current = self.current.next
+                self.current.value = item
+            elif self.current != None and self.current.next == None:
+                self.current.next = self.storage.head
+                self.current.value = item
+            else:
+                self.storage.head.value = item
+                self.current = self.storage.head
         else: 
-            self.storage.add_to_head(item)
+            self.storage.add_to_tail(item)
 
     def get(self):
         # Note:  This is the only [] allowed
         list_buffer_contents = []
 
         # TODO: Your code here
-        current = self.storage.head
-        while current.next != None:
-            if current.value != None:
-                list_buffer_contents.append(current.value)
+        current_node = self.storage.head
+        while current_node != None:
+            if current_node.value != None:
+                list_buffer_contents.append(current_node.value)
+                current_node = current_node.next
         return list_buffer_contents
 
 # ----------------Stretch Goal-------------------
