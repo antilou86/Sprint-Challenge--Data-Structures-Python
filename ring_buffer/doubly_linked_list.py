@@ -48,6 +48,9 @@ class DoublyLinkedList:
     def __len__(self):
         return self.length
 
+    def __repr__(self):
+        return(f"{self.head}, {self.tail}, {self.length}")
+
     """Wraps the given value in a ListNode and inserts it 
     as the new head of the list. Don't forget to handle 
     the old head node's previous pointer accordingly."""
