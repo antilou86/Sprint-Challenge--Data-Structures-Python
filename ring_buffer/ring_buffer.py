@@ -11,14 +11,14 @@ class RingBuffer:
         #if at capacity, add to the last item in the list
         if self.storage.length == self.capacity:
             if self.current != None and self.current.next != None:
+                self.current.value = item
                 self.current = self.current.next
-                self.current.value = item
             elif self.current != None and self.current.next == None:
-                self.current.next = self.storage.head
                 self.current.value = item
+                self.current.next = self.storage.head
             else:
                 self.storage.head.value = item
-                self.current = self.storage.head
+                self.current = self.storage.head.next
         else: 
             self.storage.add_to_tail(item)
 
@@ -26,12 +26,11 @@ class RingBuffer:
         # Note:  This is the only [] allowed
         list_buffer_contents = []
 
-        # TODO: Your code here
+        # TO-DO: Your code here
         current_node = self.storage.head
         while current_node != None:
-            if current_node.value != None:
-                list_buffer_contents.append(current_node.value)
-                current_node = current_node.next
+            list_buffer_contents.append(current_node.value)
+            current_node = current_node.next
         return list_buffer_contents
 
 # ----------------Stretch Goal-------------------
